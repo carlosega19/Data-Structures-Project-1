@@ -1,0 +1,4 @@
+Farmatodo,Distrito Capital,Caracas,El Hatillo,0424 20371
+Locatel,Miranda,Los Teques,Calle GuaI,4824 59845
+Farmarket,Distrito Capital,Antimano,UCAB,0412 2520168
+Farmatodo,Guarico,San Juan de los Morros,Calle calabozo,0412 5579321
