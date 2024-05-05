@@ -211,19 +211,19 @@ void addBranch(branch**B , branch**L, string codeB , string name, string city , 
 
 void createBranch(branch**B , branch**L) {
 	string name , city , state , address , tlf , code;
-    bool validCode = true;
+    bool invalidCode = true;
     cin.ignore();
     do
     {
         cout << "\n\t- Escribe el CODIGO de la nueva SUCURSAL: ";
         getline(cin, code);
         fflush(stdin);
-        validCode = searchBranchByCode(*B, code);
-        if (validCode)
+        invalidCode = searchBranchByCode(*B, code);
+        if (invalidCode)
         {
             cout << "\n\t\t -- CODIGO YA EXISTENTE -- \n\n";
         }
-    } while (validCode);
+    } while (invalidCode);
 	
     fflush(stdin);
 	cout << "\n\t- Escribe el NOMBRE de la nueva SUCURSAL: "; 
@@ -261,10 +261,7 @@ void deleteBranch(branch**B , branch**L, string z){
           delete temp;
      }
      else{
-          while (ax->next && tolow(ax->next->code) != tolow(z))
-          {
-               ax =ax->next;
-          }
+          while (ax->next && tolow(ax->next->code) != tolow(z)) ax = ax->next;
           if (ax->next)
           {
                if (ax->next == *L)
@@ -311,6 +308,7 @@ void optionsModBranch(branch*selected){
 	string op3 = "3. CIUDAD";
 	string op4 = "4. DIRECCION";
 	string op5 = "5. TELEFONO";
+    string op6 = "6. CODIGO";
 	string op0 = "0. VOLVER A MENÚ ANTERIOR.";
 	string msg = "Su opcion (0-5) : _|";
 
@@ -321,6 +319,7 @@ void optionsModBranch(branch*selected){
 	cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
 	cout << setw((lineWidth + op4.length()) / 2) << op4 << endl;
 	cout << setw((lineWidth + op5.length()) / 2) << op5 << endl;
+    cout << setw((lineWidth + op6.length()) / 2) << op6 << endl;
 	cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
 	cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
 	cout << line << endl;
@@ -354,37 +353,85 @@ void menuModBranch(branch *B){
                          cin.ignore();
                          cout<<"Nuevo nombre: ";
                          getline(cin , userEntry);
-                         selected->name = userEntry;
-                         system("pause");
+                         cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                         cin >> op;
+                         if (op == 1)
+                         {
+                             selected->name = userEntry;
+                         }
+                         else op = -1;
                          break;
                     case 2:
                          cout<<"Estado anterior: "<<selected->state<<endl;
                          cin.ignore();
                          cout<<"Nuevo estado: ";
                          getline(cin , userEntry);
-                         selected->state = userEntry;
+                         cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                         cin >> op;
+                         if (op == 1)
+                         {
+                             selected->state = userEntry;
+                         }
+                         
                          break;
                     case 3:
                          cout<<"Ciudad anterior: "<<selected->city<<endl;
                          cin.ignore();
                          cout<<"Nueva ciudad: ";
                          getline(cin , userEntry);
-                         selected->city = userEntry;
+                         cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                         cin >> op;
+                         if (op == 1)
+                         {
+                             selected->city = userEntry;
+                         }
                          break;
                     case 4:
                          cout<<"Direccion anterior: "<<selected->address<<endl;
                          cin.ignore();
                          cout<<"Nueva ciudad: ";
                          getline(cin , userEntry);
-                         selected->address = userEntry;
+                         cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                         cin >> op;
+                         if (op == 1)
+                         {
+                             selected->address = userEntry;
+                         }
                          break;
                     case 5:
                          cout<<"Telefono anterior: "<<selected->tlf<<endl;
                          cin.ignore();
                          cout<<"Nueva ciudad: ";
                          getline(cin , userEntry);
-                         selected->tlf = userEntry;
+                         cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                         cin >> op;
+                         if (op == 1)
+                         {
+                             selected->tlf = userEntry;
+                         }
                          break;
+                    case 6:
+                        bool ininvalidCode = true;
+                        cout << "Codigo anterior: " << selected->code << endl;
+                        cin.ignore();
+                        do
+                        {
+                            fflush(stdin);
+                            cout << "Nuevo codigo: ";
+                            getline(cin, userEntry);
+                            ininvalidCode = searchBranchByCode(B, userEntry);
+                            if (ininvalidCode)
+                            {
+                                cout << "\n\t\t\t-- CODIGO YA EXISTENTE --\n\n";
+                            }
+                        } while (ininvalidCode);
+                        cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                        cin >> op;
+                        if (op == 1)
+                        {
+                            selected->code = userEntry;
+                        }
+                        break;
                }
                fflush(stdin);
           } while (op != 0);
@@ -411,7 +458,6 @@ void menuDeleBranch(branch**B,branch**L){
          if (op == 1) {
              deleteBranch(B, L, selected->code);
              cout << "\n\t-- SUCURSAL ELIMINADA --\n\n";
-             system("pause");
          }
             
      }
@@ -533,14 +579,50 @@ void menuConsultByDesc(branch*B){
      } while (op != 0);
 }
 
-
 /* PRODUCTS <----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+// SEARCHS A PRODUCT BY THE CODE
 product* searchProductByCode(product*P, string str) {
     if (!P) return NULL;
     if (tolow(P->code) == tolow(str)) return P;
     return searchProductByCode(P->next, str);
 }
 
+// DELETES A PRODUCTS OF LIST
+void deleteProduct(product**P , product**L, string str) {
+    if (!(*P)) return;
+    product* ax = *P, * temp;
+    if (tolow(ax->code) == tolow(str))
+    {
+        temp = ax;
+        (*P) = (*P)->next;
+        delete temp;
+    }
+    else
+    {
+        while (ax->next && ax->next->code != str) ax = ax->next;
+        if (ax->next)
+        {
+            if (ax->next == *L)
+            {
+                temp = ax->next;
+                ax->next = temp->next;
+                delete temp;
+                *L = ax;
+            }
+            else
+            {
+                temp = ax->next;
+                ax->next = temp->next;
+                delete temp;
+            }
+        }
+    }
+    
+
+}
+
+// ADDS A PRODUCT TO LIST
 void addProduct(product** P, product** L, string codeP, string name, string description, float price) {
     product* newP = new product;
     newP->name = name;
@@ -567,19 +649,20 @@ void addProduct(product** P, product** L, string codeP, string name, string desc
     }
 }
 
+// CONTROLLER CREATOR OF A PRODUCT
 void createProduct(product**P , product**L){
     string code , name , description;
     float price;
-    bool validCode = true;
+    bool invalidCode = true;
     cin.ignore();
-    do
+    do // IF THE CODE IS ALREADY TAKES, THE USER IS OBLIGATED TO TRY ANOTHER CODE
     {
         fflush(stdin);
         cout << "\n\t- Escribe el CODIGO del nuevo PRODUCTO: ";
         getline(cin, code);
-        validCode = searchProductByCode(*P , code);
-        if (validCode) cout << "\n\t\t-- CODIGO YA EXISTENTE --\n\n";
-    } while (validCode);
+        invalidCode = searchProductByCode(*P , code);
+        if (invalidCode) cout << "\n\t\t-- CODIGO YA EXISTENTE --\n\n";
+    } while (invalidCode);
 
     fflush(stdin);
     cout << "\n\t- Escribe el NOMBRE del nuevo PRODUCTO: ";
@@ -602,8 +685,170 @@ void createProduct(product**P , product**L){
 
 void printProduct(product*P) {
     if (!P) return;
-    cout << "\n\t - " << P->name << " [" << P->code << "]" << "\n\t\t ~ Descripcion: " << P->description << "\n\t\t ~ Precio: " << P->price<<"$\n\n";
+    cout << "\n\t - " << P->name << " [" << P->code << "]";
     printProduct(P->next);
+}
+
+// RETURNS A SELECTED PRODUCT BY CODE
+product* selectProductByCode(product* P) {
+    string codeSelect;
+    printProduct(P);
+    cin.ignore();
+    cout << "\n\n\n\tIngrese el codigo de la sucursal entre []: ";
+    getline(cin, codeSelect);
+    return searchProductByCode(P, codeSelect);
+}
+
+// DISPLAY OPTIONS OF MODIFY PRODUCT
+void optionsModProduct(product*selected) {
+    system("cls");
+    menuHeader();
+    string subtitle = "MODIFICAR";
+    string op1 = "1. NOMBRE";
+    string op2 = "2. DESCRIPCION";
+    string op3 = "3. PRECIO";
+    string op4 = "4. CODIGO";
+    string op0 = "0. VOLVER A MENÚ ANTERIOR.";
+    string msg = "Su opcion (0-5) : _|";
+
+    cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+    cout << line << endl;
+    cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
+    cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
+    cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
+    cout << setw((lineWidth + op4.length()) / 2) << op4 << endl;
+    cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+    cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
+    cout << line << endl;
+    cout << "\n\tSUCURSAL ENCONTRADA: \n";
+    cout << "\n\t - " << selected->name << " [" << selected->code << "]";
+    cout << "\n\t\t ~ Descripcion: " << selected->description;
+    cout << "\n\t\t ~ Precio: " << selected->price << "$\n\n";
+    cout << "\nIngresa la opcion a modificar: ";
+}
+
+// MODIFY PRODUCTO
+void menuModProduct(product* P) {
+    system("cls");
+    menuHeader();
+    string subtitle = "CONSULTAR SUCURSAL POR DESCRIPCION";
+    string op0 = "0. VOLVER A MENU ANTERIOR.";
+    cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+    cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+    cout << line << endl;
+    product* selected = selectProductByCode(P); // THE USER SELECT A PRODUCT
+    if (!selected)
+    {
+        cout << "\n\n\t\t-- Producto no encontrado --\n\n";
+        
+    }
+    else {
+        int op;
+        string userEntry;
+        float userPrice;
+        do
+        {
+            optionsModProduct(selected);
+            cin >> op;
+            fflush(stdin);
+            switch (op)
+            {
+            case 1:
+                fflush(stdin);
+                cout << "Nombre anterior: " << selected->name << endl;
+                cin.ignore();
+                cout << "Nuevo nombre: ";
+                getline(cin, userEntry);
+                cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                cin >> op;
+                if (op == 1)
+                {
+                    selected->name = userEntry;
+                }
+                else op = -1;
+                break;
+            case 2:
+                cout << "Descripcion anterior: " << selected->description << endl;
+                cin.ignore();
+                cout << "Nueva descripcion: ";
+                getline(cin, userEntry);
+                cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                cin >> op;
+                if (op == 1)
+                {
+                    selected->description = userEntry;
+                }
+                else op = -1;
+              
+                
+                break;
+            case 3:
+                cout << "Precio anterior: " << selected->price << endl;
+                cin.ignore();
+                cout << "Nuevo precio: ";
+                cin >> userPrice;
+                cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                cin >> op;
+                if (op == 1)
+                {
+                    selected->price = userPrice;
+                }
+                else op = -1;
+                break;
+            case 4:
+                bool invalidCode = true;
+                cout << "Codigo anterior: " << selected->code << endl;
+                cin.ignore();
+                do
+                {
+                    fflush(stdin);
+                    cout << "Nuevo codigo: ";
+                    getline(cin, userEntry);
+                    invalidCode = searchProductByCode(P , userEntry);
+                    if (invalidCode)
+                    {
+                        cout << "\n\t\t\t-- CODIGO YA EXISTENTE --\n\n";
+                    }
+                } while (invalidCode);
+                cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                cin >> op;
+                if (op == 1)
+                {
+                    selected->code = userEntry;
+                }
+                else op = -1;
+                break;
+            }
+            fflush(stdin);
+        } while (op != 0);
+    }
+    system("pause");
+}
+
+// DELETE PRODUCT
+void menuDelProduct(product**P , product**L) {
+    system("cls");
+    menuHeader();
+    string subtitle = "ELIMINAR PRODUCTO";
+    string op0 = "0. VOLVER A MENU ANTERIOR.";
+    cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+    cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+    cout << line << endl;
+    product* selected = selectProductByCode(*P);
+    if (selected)
+    {
+        cout << "\n\t - " << selected->name << " [" << selected->code << "]";
+        cout << "\n\t\t ~ Descripcion: " << selected->description << "\n\t\t ~ Precio: " << selected->price << "$\n\n";
+        cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+        int op;
+        cin >> op;
+        if (op == 1)
+        {
+            deleteProduct(P , L , selected->code);
+            cout << "\n\n\t\t-- PRODUCTO ELIMINADO --\n\n";
+        }
+    }
+    system("pause");
 }
 
 
@@ -741,10 +986,11 @@ int main() {
                                             case 1: // ADD PRODUCTS
                                                 createProduct(&products, &lastP);
                                                 break;
-                                            case 2:
-                                                cout << "\n\tLista de productos: \n\n";
-                                                printProduct(products);
-                                                system("pause");
+                                            case 2: // MODIFY A PRODUCT
+                                                menuModProduct(products);
+                                                break;
+                                            case 3: // DELETE A PRODUCT
+                                                menuDelProduct(&products , &lastP);
                                                 break;
                                         }
                                         /* In progress */
@@ -831,4 +1077,37 @@ int main() {
 030689,Coliflor,Verduras,2.69
 031821,Espinacas,Verduras,1.89
 032953,Calabacines,Verduras,2.09
+
+
+A14,Farmatodo,  Distrito Capital ,Caracas, El Hatillo , 0424 2087154
+B27, Supermercado Plaza ,  Distrito Capital , Caracas , Chacao , 0212 5558899
+C42, Tienda Economica ,  Distrito Capital , Caracas , Sucre , 0212 3334477
+D55, Mercado Popular ,  Distrito Capital , Caracas , Baruta , 0212 7776611
+E68, Farmacia Los Dos ,  Distrito Capital , Caracas , El Cafetal , 0212 4447722
+F81, Ferreteria El Martillo ,  Distrito Capital , Caracas , La Trinidad , 0212 6668833
+G94,Centro Comercial Oasis ,  Distrito Capital , Caracas , Santa Fe , 0212 9991155
+H107,Panaderia La Dulzura ,  Distrito Capital , Caracas , Los Palos Grandes , 0212 8889944
+I120,Carniceria San Jose ,  Distrito Capital , Caracas , Los Dos Caminos , 0212 2228811
+J133,Fruteria El Paraiso ,  Distrito Capital , Caracas , Las Mercedes , 0212 7773377
+K146,Zapateria La Moda ,  Distrito Capital , Caracas , Altamira , 0212 3337722
+L159,Libreria Los Libros ,  Distrito Capital , Caracas , Los Chorros , 0212 4441133
+M172,Tienda de Ropa Fashion ,  Distrito Capital , Caracas , El Paraiso , 0212 5552266
+N185,Mercado de Abastos ,  Distrito Capital , Caracas , Macarao , 0212 6665500
+O198,Farmacia San Francisco ,  Distrito Capital , Caracas , La Candelaria , 0212 9998844
+P211,Supermercado Caribe ,  Distrito Capital , Caracas , Catia , 0212 8886611
+Q224,Ferreteria La Herradura ,  Distrito Capital , Caracas , Caricuao , 0212 7772200
+R237,Centro Comercial Las Palmas ,  Distrito Capital , Caracas , Antimano , 0212 3334499
+S250,Panaderia La Union ,  Distrito Capital , Caracas , La Vega , 0212 4441166
+T263,Carniceria La Esquina ,  Distrito Capital , Caracas , La Pastora , 0212 5550033
+U276,Ferreteria La Nacional ,  Distrito Capital , Caracas , El Valle , 0212 6666611
+V289,Tienda de Muebles El Hogar ,  Distrito Capital , Caracas , El Junquito , 0212 9992200
+W302,Supermercado La Economia ,  Distrito Capital , Caracas , Coche , 0212 8888844
+X315,Farmacia Popular ,  Distrito Capital , Caracas , La Urbina , 0212 7771133
+Y328,Centro Comercial El Centro ,  Distrito Capital , Caracas , La Yaguara , 0212 3335500
+Z341,Panaderia La Estrella ,  Distrito Capital , Caracas , El Recreo , 0212 4446611
+AA354,Tienda de Electronicos Electrica ,  Distrito Capital , Caracas , Petare , 0212 5554400
+AB367,Ferreteria El Constructor ,  Distrito Capital , Caracas , El Cementerio , 0212 6668844
+AC380,Centro Comercial El Dorado ,  Distrito Capital , Caracas , El Valle , 0212 9991133
+AD393,Panaderia La Alegria ,  Distrito Capital , Caracas , La Paz , 0212 8885500
+AE406,Carniceria La Reina ,  Distrito Capital , Caracas , El Paraiso , 0212 7778844
 */

@@ -1,4 +1,4 @@
-A14,Farmatodo,  Distrito Capital ,Caracas, El Hatillo , 0424 2087154
+A14,Farmatodo,  Distrito[ Capital ,Caracas, El Hatillo , 0424 2087154
 B27, Supermercado Plaza ,  Distrito Capital , Caracas , Chacao , 0212 5558899
 C42, Tienda Economica ,  Distrito Capital , Caracas , Sucre , 0212 3334477
 D55, Mercado Popular ,  Distrito Capital , Caracas , Baruta , 0212 7776611
@@ -28,4 +28,4 @@ AA354,Tienda de Electronicos Electrica ,  Distrito Capital , Caracas , Petare , 
 AB367,Ferreteria El Constructor ,  Distrito Capital , Caracas , El Cementerio , 0212 6668844
 AC380,Centro Comercial El Dorado ,  Distrito Capital , Caracas , El Valle , 0212 9991133
 AD393,Panaderia La Alegria ,  Distrito Capital , Caracas , La Paz , 0212 8885500
-AE406,Carniceria La Reina ,  Distrito Capital , Caracas , El Paraiso , 0212 7778844
+AE405,Carniceria La Reina ,  Distrito Capital , Caracas , El Paraiso ,0212 7148421

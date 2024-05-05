@@ -28,4 +28,4 @@
 029557,Brócoli,Verduras,2.39
 030689,Coliflor,Verduras,2.69
 031821,Espinacas,Verduras,1.89
-032953,Calabacines,Verduras,2.09
+032411,Calabacines,Verduras,2.54
