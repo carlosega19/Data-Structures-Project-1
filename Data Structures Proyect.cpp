@@ -39,6 +39,7 @@ struct branch
 	string tlf;
 	/* Pointers */
 	product* products = NULL;
+    product* lastP = NULL;
 	branch* next;
 };
 
@@ -509,7 +510,7 @@ void menuConsultByState(branch*B ){
      cout << "\n\tSUCURSALES ENCONTRADAS: \n";
      branch* selected = searchBranchByState(B , userInput);
      if (!selected) cout << "\n\n\t\tNINGUNA...\n\n";
-     while (selected != NULL)
+     while (selected)
      {
          
          cout << "\n\t - " << selected->name << " [" << selected->code << "]";
@@ -538,13 +539,13 @@ void menuConsultByCity(branch* B) {
     cout << "\n\tSUCURSALES ENCONTRADAS: \n";
     branch* selected = searchBranchByCity(B, userInput);
     if (!selected) cout << "\n\n\t\tNINGUNA...\n\n";
-    while (selected != NULL)
+    while (selected)
     {
 
         cout << "\n\t - " << selected->name << " [" << selected->code << "]";
         cout << "\n\t\t ~ Direccion: " << selected->city << ", " << selected->state << ", " << selected->address;
         cout << "\n\t\t ~ Telefono: " << selected->tlf << "\n\n";
-        selected = searchBranchByState(selected->next, userInput);
+        selected = searchBranchByCity(selected->next, userInput);
     }
     system("pause");
 }
@@ -689,6 +690,17 @@ void printProduct(product*P) {
     printProduct(P->next);
 }
 
+void showAllProducts(product*P) {
+    system("cls");
+    menuHeader();
+    string subtitle = "LISTA DE PRODUCTOS";
+    cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+    cout << line << endl;
+    printProduct(P);
+    cout << "\n\n";
+    system("pause");
+}
+
 // RETURNS A SELECTED PRODUCT BY CODE
 product* selectProductByCode(product* P) {
     string codeSelect;
@@ -727,7 +739,7 @@ void optionsModProduct(product*selected) {
     cout << "\nIngresa la opcion a modificar: ";
 }
 
-// MODIFY PRODUCTO
+// MODIFY PRODUCT
 void menuModProduct(product* P) {
     system("cls");
     menuHeader();
@@ -851,6 +863,99 @@ void menuDelProduct(product**P , product**L) {
     system("pause");
 }
 
+void addProductToBranch(branch*B , product*P) {
+    addProduct(&B->products, &B->lastP, P->code, P->name, P->description, P->price);
+}
+
+void menuAddProductToBranch(branch*B, product*P) {
+    system("cls");
+    menuHeader();
+    string subtitle = "1.2.7.2 AGREGAR PRODUTO A SUCURSAL";
+    string op0 = "0. VOLVER A MENU ANTERIOR.";
+    cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+    cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+    cout << line << endl;
+    product* selected = selectProductByCode(P);
+    if (selected)
+    {
+        cout << "\n\t - " << selected->name << " [" << selected->code << "]";
+        cout << "\n\t\t ~ Descripcion: " << selected->description << "\n\t\t ~ Precio: " << selected->price << "$\n\n";
+        cout << "\n\tSeguro que desea agregar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+        int op;
+        cin >> op;
+        if (op == 1)
+        {
+            addProductToBranch(B, selected);
+            cout << "\n\n\t\t-- PRODUCTO AGREGADO A SUCURSAL --\n\n";
+        }
+    }
+}
+
+void menuInventory(branch*B , product*P) {
+    int op;
+    branch* selected = NULL;
+    do
+    {
+        system("cls");
+        menuHeader();
+
+        string subtitle = "SISTEMA DE INVENTARIO Y FACTURACION";
+        string op1 = "1.2.7.1. SELECCIONAR SUCURSAL";
+        string op2 = "1.2.7.2. AGREGAR PRODUCTOS";
+        string op3 = "1.2.7.3. ELIMINAR PRODUCTOS";
+        string op4 = "1.2.7.4. MODIFICAR INVENTARIO";
+        string op5 = "1.2.7.5. MOSTRAR TODOS LOS PRODUCTOS";
+        string op0 = "0. VOLVER A MENÚ ANTERIOR.";
+        string msg = "Su opción (0-5) : _|";
+
+        cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+        cout << line << endl;
+        cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
+        cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
+        cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
+        cout << setw((lineWidth + op4.length()) / 2) << op4 << endl;
+        cout << setw((lineWidth + op5.length()) / 2) << op5 << endl;
+        cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+        cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
+        cout << line << endl;
+        cout << "\n\tSucursal seleccionada: ";
+        if (!selected)
+        {
+            cout << "NINGUNA\n";
+        }
+        else
+        {
+            cout << selected->name << " [" << selected->code << "]\n\n";
+        }
+        cout << msg;
+        cin >> op;
+        fflush(stdin);
+        switch (op)
+        {
+            case 1:
+                selected = selectBranchByCode(B);
+                cout << "\n";
+                break;
+            case 2:
+                if (!selected)
+                {
+                    cout << "\n\t\t\t-- SUCURSAL NO SELECCIONADA --\n\n";
+                }
+                else
+                {
+                    menuAddProductToBranch(selected, P);
+                }
+                break;
+            case 3:
+                cout << "PRODUCTOS DE " << selected->name;
+                printProduct(selected->products);
+                cout << "\n\n";
+                system("pause");
+                break;
+        }
+    } while (op != 0);
+    
+}
 
 /* FILE MANAGMENT */
 void readBranchs(branch**B , branch**L){ // Update the function to delete the trash in line
@@ -957,11 +1062,10 @@ int main() {
 
      product* products = NULL;
      product* lastP = NULL;
-     // READ BRANCHS
-     readBranchs(&branchs , &lastB);
      // READ PRODUCTS
      readProducts(&products, &lastP);
-
+     // READ BRANCHS
+     readBranchs(&branchs , &lastB);
 	do
 	{
 		menu();
@@ -1021,8 +1125,10 @@ int main() {
                                                   menuConsultByDesc(branchs);
                                                   break;
                                              case 6: // Show All Products  (PRODUCTS IN DEVELOPMENT)
+                                                 showAllProducts(products);
                                                  break;
                                              case 7: // INVENTORY          (PRODUCTS IN DEVELOPMENT)
+                                                 menuInventory(branchs , products);
                                                  break;
                                         }
                             } while (op != 0);
@@ -1035,15 +1141,14 @@ int main() {
 				break;
 			case 2: 
 				// No available
-                    printBranchs(branchs);
 				break;
 			case 3:
 				// No available
 				break;
 		}
 	} while (op != 0);
-	saveBranchs(branchs);
     saveProducts(products);
+	saveBranchs(branchs);
     return 0;
 }
 

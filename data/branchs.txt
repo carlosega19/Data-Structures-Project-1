@@ -14,7 +14,7 @@ M172,Tienda de Ropa Fashion ,  Distrito Capital , Caracas , El Paraiso , 0212 55
 N185,Mercado de Abastos ,  Distrito Capital , Caracas , Macarao , 0212 6665500
 O198,Farmacia San Francisco ,  Distrito Capital , Caracas , La Candelaria , 0212 9998844
 P211,Supermercado Caribe ,  Distrito Capital , Caracas , Catia , 0212 8886611
-Q224,Ferreteria La Herradura ,  Distrito Capital , Caracas , Caricuao , 0212 7772200
+Q745,Ferreteria La Herradura ,  Distrito Capital , Caracas , Caricuao ,0212 842140
 R237,Centro Comercial Las Palmas ,  Distrito Capital , Caracas , Antimano , 0212 3334499
 S250,Panaderia La Union ,  Distrito Capital , Caracas , La Vega , 0212 4441166
 T263,Carniceria La Esquina ,  Distrito Capital , Caracas , La Pastora , 0212 5550033
