@@ -1,5 +1,4 @@
 001825,Bananas,Frutas,4.99
-001825,Bananas,Frutas,4.99
 002357,Manzanas,Frutas,3.49
 003489,Uvas,Frutas,5.99
 004621,Naranjas,Frutas,2.79
@@ -29,3 +28,4 @@
 030689,Coliflor,Verduras,2.69
 031821,Espinacas,Verduras,1.89
 032411,Calabacines,Verduras,2.54
+01484,Manzana,Fruta,4.99
