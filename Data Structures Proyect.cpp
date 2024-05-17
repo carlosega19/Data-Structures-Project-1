@@ -38,8 +38,8 @@ struct branch
 	string address;
 	string tlf;
 	/* Pointers */
-	product* products = NULL;
-     product* lastP = NULL;
+	product* products;
+    product* lastP;
 	branch* next;
 };
 
@@ -174,6 +174,29 @@ bool isValid(string str){
     return !str.empty() && !onlySpace(str);
 }
 
+bool find(const char* arr, int size, char charc) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == charc) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void replaceTrash(string& line) {
+    char invalidChars[50] = "!@#$%^&*()_+=-/\\`~|'\".<:;[]{}?/";
+    int size = sizeof(invalidChars) - 1;
+
+    string newline;
+    for (char& c : line) {
+        if (!find(invalidChars, size, c)) {
+            newline += c;
+        }
+    }
+    line = newline;
+}
+
+
 /* PRODUCTS <----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 branch* searchBranchByCode(branch* B, string codeB) {
      if (!B) return NULL;
@@ -207,6 +230,8 @@ void addBranch(branch**B , branch**L, string codeB , string name, string city , 
 	newB->state = state;
 	newB->address = address;
 	newB->tlf = tlf;
+    newB->products = NULL;
+    newB->lastP = NULL;
 	/* Update the head of the list */
      if (!(*B))
      {
@@ -693,7 +718,7 @@ void createProduct(product**P , product**L){
          cin.ignore();
          price = -1;
      }
-     if (!isValid(name) || isValid(description) || price <= 0) {
+     if (!isValid(name) || !isValid(description) || price <= 0) {
           cout << " \n\n\t\t-- Campos no rellenados correctamente --\n\n"; 
      }
      else
@@ -718,7 +743,6 @@ void showAllProducts(product*P) {
      cout << line << endl;
      printProducts(P);
      cout << "\n\n";
-     system("pause");
 }
 
 
@@ -1345,7 +1369,7 @@ void menuInventory(branch*B , product*P) {
               op = -1;
           }
           fflush(stdin);
-          if (!selected && op != 0)
+          if (!selected && (op != 0 && op != 1))
           {
               cout << "\n\t\t\t-- SUCURSAL NO SELECCIONADA --\n\n\n";
               op = -1;
@@ -1370,22 +1394,23 @@ void menuInventory(branch*B , product*P) {
                         cout << "\n\n\t\tPRODUCTOS DE " << selected->name<<"\n\n";
                         showAllProducts(selected->products);
                         cout << "\n\n";
+                        system("pause");
                     break;
           }
      } while (op != 0);
 }
 
 /* FILES MANAGMENT */
-// Take branchs in .txt
+// 
 void readBranchs(branch**B , branch**L , unordered_map<std::string, branch*>& tableB){ // Update the function to delete the trash in line
-     ifstream archivo("C:\\Users\\aabre\\OneDrive\\Documents\\UCAB\\SEGUNDO SEMESTRE\\Estructuras de Datos\\Proyecto FASE 1\\Data Structures Proyect\\data\\branchs.txt");
+     ifstream archivo("branchs.txt");
      if (archivo.fail()) return; 
      string n, s , c , d , t , code ,line;
      while (getline(archivo , line))
      {
+          replaceTrash(line);
           istringstream ss(line);
           string dato;
-          
           for (int i = 1; i < 7; i++)
           {
                getline(ss , dato , ',');
@@ -1420,7 +1445,7 @@ void readBranchs(branch**B , branch**L , unordered_map<std::string, branch*>& ta
 
 // Write branchs in .txt
 void saveBranchs(branch*B){ 
-     ofstream archivo("C:\\Users\\aabre\\OneDrive\\Documents\\UCAB\\SEGUNDO SEMESTRE\\Estructuras de Datos\\Proyecto FASE 1\\Data Structures Proyect\\data\\branchs.txt");
+     ofstream archivo("branchs.txt");
      if (archivo.is_open())
      {
           while (B)
@@ -1434,12 +1459,13 @@ void saveBranchs(branch*B){
 
 // Take products of .txt
 void readProducts(product** P, product** L) { // Update the function to delete the trash in line
-     ifstream archivo("C:\\Users\\aabre\\OneDrive\\Documents\\UCAB\\SEGUNDO SEMESTRE\\Estructuras de Datos\\Proyecto FASE 1\\Data Structures Proyect\\data\\products.txt");
+     ifstream archivo("products.txt");
      if (archivo.fail()) return;
      string code, n, d,line;
      float price;
      while (getline(archivo, line))
      {
+          replaceTrash(line);
           istringstream ss(line);
           string dato;
 
@@ -1467,7 +1493,7 @@ void readProducts(product** P, product** L) { // Update the function to delete t
 }
 // Write products in .txt
 void saveProducts(product* P) {
-     ofstream file("C:\\Users\\aabre\\OneDrive\\Documents\\UCAB\\SEGUNDO SEMESTRE\\Estructuras de Datos\\Proyecto FASE 1\\Data Structures Proyect\\data\\products.txt");
+     ofstream file("products.txt");
      if (file.is_open())
      {
           while (P)
@@ -1481,7 +1507,7 @@ void saveProducts(product* P) {
 
 // Take the products inside each branch
 void readProductsOfBranch(branch*B , product*P , unordered_map<std::string, branch*>& tableB){
-     ifstream archivo("C:\\Users\\aabre\\OneDrive\\Documents\\UCAB\\SEGUNDO SEMESTRE\\Estructuras de Datos\\Proyecto FASE 1\\Data Structures Proyect\\data\\inventory.txt");
+     ifstream archivo("inventory.txt");
      if (archivo.fail()) return;
      string codeB, codeP , line;
      int am , minAm;
@@ -1489,6 +1515,7 @@ void readProductsOfBranch(branch*B , product*P , unordered_map<std::string, bran
      product*selectedP;
      while (getline(archivo , line))
      {
+          replaceTrash(line);
           istringstream ss(line);
           string data;
           for (int i = 0; i < 4; i++)
@@ -1521,7 +1548,7 @@ void readProductsOfBranch(branch*B , product*P , unordered_map<std::string, bran
 }
 
 void saveProductsOfBranch(branch*B){
-     ofstream archivo("C:\\Users\\aabre\\OneDrive\\Documents\\UCAB\\SEGUNDO SEMESTRE\\Estructuras de Datos\\Proyecto FASE 1\\Data Structures Proyect\\data\\inventory.txt");
+     ofstream archivo("inventory.txt");
      if (archivo.fail()) return;
      while (B)
      {
@@ -1607,6 +1634,7 @@ int main() {
                                                   break;
                                              case 6:
                                                   showAllProducts(products);
+                                                  system("pause");
                                                   break;
                                         }
                                    } while (op != 0);
@@ -1679,66 +1707,5 @@ int main() {
 }
 
 /*
-002357,Manzanas,Frutas,3.49
-003489,Uvas,Frutas,5.99
-004621,Naranjas,Frutas,2.79
-005753,Piñas,Frutas,6.49
-006885,Sandías,Frutas,7.99
-007917,Melones,Frutas,4.29
-008049,Fresas,Frutas,3.99
-009181,Arándanos,Frutas,8.49
-010313,Kiwis,Frutas,2.89
-011445,Mangos,Frutas,5.79
-012577,Peras,Frutas,3.69
-013709,Duraznos,Frutas,4.59
-014841,Cerezas,Frutas,6.99
-015973,Limones,Frutas,1.99
-017105,Plátanos,Frutas,3.29
-018237,Papayas,Frutas,4.79
-019369,Ciruelas,Frutas,2.49
-020501,Granadas,Frutas,5.29
-021633,Guayabas,Frutas,4.19
-022765,Cocos,Frutas,6.79
-023897,Tomates,Verduras,2.19
-025029,Pepinos,Verduras,1.49
-026161,Lechugas,Verduras,0.99
-027293,Zanahorias,Verduras,1.79
-028425,Pimientos,Verduras,3.09
-029557,Brócoli,Verduras,2.39
-030689,Coliflor,Verduras,2.69
-031821,Espinacas,Verduras,1.89
-032953,Calabacines,Verduras,2.09
-
-
-A14,Farmatodo,Distrito Capital,Caracas, El Hatillo , 0424 2087154
-B27, Supermercado Plaza,Distrito Capital , Caracas , Chacao , 0212 5558899
-C42, Tienda Economica,Distrito Capital , Caracas , Sucre , 0212 3334477
-D55, Mercado Popular,Distrito Capital , Caracas , Baruta , 0212 7776611
-E68, Farmacia Los Dos,Distrito Capital , Caracas , El Cafetal , 0212 4447722
-F81, Ferreteria El Martillo ,  Distrito Capital , Caracas , La Trinidad , 0212 6668833
-G94,Centro Comercial Oasis ,  Distrito Capital , Caracas , Santa Fe , 0212 9991155
-H107,Panaderia La Dulzura ,  Distrito Capital , Caracas , Los Palos Grandes , 0212 8889944
-I120,Carniceria San Jose ,  Distrito Capital , Caracas , Los Dos Caminos , 0212 2228811
-J133,Fruteria El Paraiso ,  Distrito Capital , Caracas , Las Mercedes , 0212 7773377
-K146,Zapateria La Moda ,  Distrito Capital , Caracas , Altamira , 0212 3337722
-L159,Libreria Los Libros ,  Distrito Capital , Caracas , Los Chorros , 0212 4441133
-M172,Tienda de Ropa Fashion ,  Distrito Capital , Caracas , El Paraiso , 0212 5552266
-N185,Mercado de Abastos ,  Distrito Capital , Caracas , Macarao , 0212 6665500
-O198,Farmacia San Francisco ,  Distrito Capital , Caracas , La Candelaria , 0212 9998844
-P211,Supermercado Caribe ,  Distrito Capital , Caracas , Catia , 0212 8886611
-Q224,Ferreteria La Herradura ,  Distrito Capital , Caracas , Caricuao , 0212 7772200
-R237,Centro Comercial Las Palmas ,  Distrito Capital , Caracas , Antimano , 0212 3334499
-S250,Panaderia La Union ,  Distrito Capital , Caracas , La Vega , 0212 4441166
-T263,Carniceria La Esquina ,  Distrito Capital , Caracas , La Pastora , 0212 5550033
-U276,Ferreteria La Nacional ,  Distrito Capital , Caracas , El Valle , 0212 6666611
-V289,Tienda de Muebles El Hogar ,  Distrito Capital , Caracas , El Junquito , 0212 9992200
-W302,Supermercado La Economia ,  Distrito Capital , Caracas , Coche , 0212 8888844
-X315,Farmacia Popular ,  Distrito Capital , Caracas , La Urbina , 0212 7771133
-Y328,Centro Comercial El Centro ,  Distrito Capital , Caracas , La Yaguara , 0212 3335500
-Z341,Panaderia La Estrella ,  Distrito Capital , Caracas , El Recreo , 0212 4446611
-AA354,Tienda de Electronicos Electrica ,  Distrito Capital , Caracas , Petare , 0212 5554400
-AB367,Ferreteria El Constructor ,  Distrito Capital , Caracas , El Cementerio , 0212 6668844
-AC380,Centro Comercial El Dorado ,  Distrito Capital , Caracas , El Valle , 0212 9991133
-AD393,Panaderia La Alegria ,  Distrito Capital , Caracas , La Paz , 0212 8885500
-AE406,Carniceria La Reina ,  Distrito Capital , Caracas , El Paraiso , 0212 7778844
+    PD: No se utilizan los metodos propios del objeto string
 */
