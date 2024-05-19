@@ -55,12 +55,19 @@ int length(string& line) {
     return count;
 }
 
+void printCreators() {
+    string names = "REALIZADO POR:      Andres De Quintal   Y   Carlos Galiño";
+    cout << setw((lineWidth + names.length()) / 2)  << names << endl;
+    cout << line << endl;
+}
+
 void menuHeader() {
 	string title = "SISTEMA DE INVENTARIO Y FACTURACION";
 	cout << line << endl;
 	cout << setw((lineWidth + title.length()) / 2) << title << endl;
 	cout << line << endl;
 }
+
 
 void menuMant() {
 	system("cls");
@@ -159,6 +166,7 @@ void menu() {
 	cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
 	cout << setw((lineWidth + length(msg)) / 2) << msg << endl;
 	cout << line << endl;
+    printCreators();
 }
 
 /* Functions */
@@ -895,7 +903,6 @@ void printProductsInTable(product* P) {
 
 // Función para imprimir la tabla de productos
 void tableProducts(product* P) {
-    system("cls");
     cout << "\n\n";
     string line = "|-------------------------------------------------------------------------------|";
     headerProducts(line);
