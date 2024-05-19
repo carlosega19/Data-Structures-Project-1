@@ -1,32 +1,4 @@
-A14,Farmatodo,Distrito Capital,Caracas, El Hatillo , 0424 2087154
-B27,Supermercado Plaza ,  Distrito Capital , Caracas , Chacao , 0212 5558899
-C42,Tienda Economica ,  Distrito Capital , Caracas , Sucre , 0212 3334477
-D55,Mercado Popular ,  Distrito Capital , Caracas , Baruta , 0212 7776611
-E68,Farmacia Los Dos ,  Distrito Capital , Caracas , El Cafetal , 0212 4447722
-F81,Ferreteria El Martillo ,  Distrito Capital , Caracas , La Trinidad , 0212 6668833
-G94,Centro Comercial Oasis ,  Distrito Capital , Caracas , Santa Fe , 0212 9991155
-H107,Panaderia La Dulzura ,  Distrito Capital , Caracas , Los Palos Grandes , 0212 8889944
-I120,Carniceria San Jose ,  Distrito Capital , Caracas , Los Dos Caminos , 0212 2228811
-J133,Fruteria El Paraiso ,  Distrito Capital , Caracas , Las Mercedes , 0212 7773377
-K146,Zapateria La Moda ,  Distrito Capital , Caracas , Altamira , 0212 3337722
-L159,Libreria Los Libros ,  Distrito Capital , Caracas , Los Chorros , 0212 4441133
-M172,Tienda de Ropa Fashion ,  Distrito Capital , Caracas , El Paraiso , 0212 5552266
-N185,Mercado de Abastos ,  Distrito Capital , Caracas , Macarao , 0212 6665500
-O198,Farmacia San Francisco ,  Distrito Capital , Caracas , La Candelaria , 0212 9998844
-P211,Supermercado Caribe ,  Distrito Capital , Caracas , Catia , 0212 8886611
-Q745,Ferreteria La Herradura ,  Distrito Capital , Caracas , Caricuao ,0212 842140
-R237,Centro Comercial Las Palmas ,  Distrito Capital , Caracas , Antimano , 0212 3334499
-S250,Panaderia La Union ,  Distrito Capital , Caracas , La Vega , 0212 4441166
-T263,Carniceria La Esquina ,  Distrito Capital , Caracas , La Pastora , 0212 5550033
-U276,Ferreteria La Nacional ,  Distrito Capital , Caracas , El Valle , 0212 6666611
-V289,Tienda de Muebles El Hogar ,  Distrito Capital , Caracas , El Junquito , 0212 9992200
-W302,Supermercado La Economia ,  Distrito Capital , Caracas , Coche , 0212 8888844
-X315,Farmacia Popular ,  Distrito Capital , Caracas , La Urbina , 0212 7771133
-Y328,Centro Comercial El Centro ,  Distrito Capital , Caracas , La Yaguara , 0212 3335500
-Z341,Panaderia La Estrella ,  Distrito Capital , Caracas , El Recreo , 0212 4446611
-AA354,Tienda de Electronicos Electrica ,  Distrito Capital , Caracas , Petare , 0212 5554400
-AB367,Ferreteria El Constructor ,  Distrito Capital , Caracas , El Cementerio , 0212 6668844
-AC380,Centro Comercial El Dorado ,  Distrito Capital , Caracas , El Valle , 0212 9991133
-AD393,Panaderia La Alegria ,  Distrito Capital , Caracas , La Paz , 0212 8885500
-AE405,Carniceria La Reina ,  Distrito Capital , Caracas , El Paraiso ,0212 7148420
-A88,Famatodo Las Mercedes,Miranda,Caracas,Las Mercedes,0424 2487432
+101,Montalban,Caracas,D.C,212666699,Ed. Luna. PB. Av Paez. El paraiso
+103,La Vega,Caracas,D.C,212999966,Ed. Sol. PB. La india. El paraiso
+204,Chacaito,Caracas,D.C,212555777,Plaza Brion. CC. Chacaito L200. Chacaito.
+316,La Carlota,Caracas,D.C,212235555,CC. Milenium. L502. La Carlota

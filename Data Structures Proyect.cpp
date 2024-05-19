@@ -38,7 +38,7 @@ struct branch
 	string address;
 	string tlf;
 	/* Pointers */
-	product* products;
+    product* products;
     product* lastP;
 	branch* next;
 };
@@ -47,6 +47,14 @@ struct branch
 /* ------- Menu Managment  ------- */
 int lineWidth = 120;
 string line(lineWidth, '-');
+
+int length(string& line) {
+    int count = 0;
+    while (line[count] != '\0') {
+        count++;
+    }
+    return count;
+}
 
 void menuHeader() {
 	string title = "SISTEMA DE INVENTARIO Y FACTURACION";
@@ -65,13 +73,13 @@ void menuMant() {
 	string op0 = "0. VOLVER.";
 	string msg = "Su opcion (0-3) : _|";
 
-	cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+	cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
 	cout << line << endl;
-	cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
-	cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
-	cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
-	cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
-	cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
+	cout << setw((lineWidth + length(op1)) / 2) << op1 << endl;
+	cout << setw((lineWidth + length(op2)) / 2) << op2 << endl;
+	cout << setw((lineWidth + length(op3)) / 2) << op3 << endl;
+	cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
+	cout << setw((lineWidth + length(msg)) / 2) << msg << endl;
 	cout << line << endl;
 }
 
@@ -90,16 +98,16 @@ void menuMantProds(){
 	string msg = "Su opcion (0-6) : _|";
 
 
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
 	cout << line << endl;
-	cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
-	cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
-	cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
-	cout << setw((lineWidth + op4.length()) / 2) << op4 << endl;
-	cout << setw((lineWidth + op5.length()) / 2) << op5 << endl;
-	cout << setw((lineWidth + op6.length()) / 2) << op6 << endl;
-	cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
-	cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
+	cout << setw((lineWidth + length(op1)) / 2) << op1 << endl;
+	cout << setw((lineWidth + length(op2)) / 2) << op2 << endl;
+	cout << setw((lineWidth + length(op3)) / 2) << op3 << endl;
+	cout << setw((lineWidth + length(op4)) / 2) << op4 << endl;
+	cout << setw((lineWidth + length(op5)) / 2) << op5 << endl;
+	cout << setw((lineWidth + length(op6)) / 2) << op6 << endl;
+	cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
+	cout << setw((lineWidth + length(msg)) / 2) << msg << endl;
 	cout << line << endl;
 }
 
@@ -119,17 +127,17 @@ void menuMantBranchs(){
 	string msg = "Su opcion (0-7) : _|";
 
 
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
 	cout << line << endl;
-	cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
-	cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
-	cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
-	cout << setw((lineWidth + op4.length()) / 2) << op4 << endl;
-	cout << setw((lineWidth + op5.length()) / 2) << op5 << endl;
-	cout << setw((lineWidth + op6.length()) / 2) << op6 << endl;
-	cout << setw((lineWidth + op7.length()) / 2) << op7 << endl;
-	cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
-	cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
+	cout << setw((lineWidth + length(op1)) / 2) << op1 << endl;
+	cout << setw((lineWidth + length(op2)) / 2) << op2 << endl;
+	cout << setw((lineWidth + length(op3)) / 2) << op3 << endl;
+	cout << setw((lineWidth + length(op4)) / 2) << op4 << endl;
+	cout << setw((lineWidth + length(op5)) / 2) << op5 << endl;
+	cout << setw((lineWidth + length(op6)) / 2) << op6 << endl;
+	cout << setw((lineWidth + length(op7)) / 2) << op7 << endl;
+	cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
+	cout << setw((lineWidth + length(msg)) / 2) << msg << endl;
 	cout << line << endl;
 }
 
@@ -144,13 +152,13 @@ void menu() {
 	string msg = "Su opcion (0-3) : _|";
 
 	menuHeader();
-	cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+	cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
 	cout << line << endl;
-	cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
-	cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
-	cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
-	cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
-	cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
+	cout << setw((lineWidth + length(op1)) / 2) << op1 << endl;
+	cout << setw((lineWidth + length(op2)) / 2) << op2 << endl;
+	cout << setw((lineWidth + length(op3)) / 2) << op3 << endl;
+	cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
+	cout << setw((lineWidth + length(msg)) / 2) << msg << endl;
 	cout << line << endl;
 }
 
@@ -163,15 +171,23 @@ string tolow(string cad){
      return cad;
 }
 
-bool onlySpace(const string& str)
-{
-    return all_of(str.begin(), str.end(), [](char c) {
-        return isspace(static_cast<unsigned char>(c));
-        });
+
+bool onlySpace(const std::string & str) {
+     bool result = true;
+     for (size_t i = 0; i < sizeof(str); i++) {
+         if (!isspace(static_cast<unsigned char>(str[i]))) {
+             result = false;
+             break;
+         }
+     }
+     return result;
 }
 
+
+
+
 bool isValid(string str){
-    return !str.empty() && !onlySpace(str);
+    return !onlySpace(str) && length(str) > 0 && length(str) < 30;
 }
 
 bool find(const char* arr, int size, char charc) {
@@ -264,16 +280,16 @@ void createBranch(branch**B , branch**L , unordered_map<std::string, branch*> &t
      } while (invalidCode);
           
      fflush(stdin);
-	 cout << "\n\t- Escribe el NOMBRE de la nueva SUCURSAL: "; 
+	 cout << "\n\t- Escribe el NOMBRE de la nueva SUCURSAL (max.30): "; 
 	 getline(cin ,name);
 	 fflush(stdin);
-	 cout << "\n\t- Escribe el ESTADO de la nueva SUCURSAL: ";  
+	 cout << "\n\t- Escribe el ESTADO de la nueva SUCURSAL (max.30): ";  
 	 getline(cin, state);
 	 fflush(stdin);
-	 cout << "\n\t- Escribe la CIUDAD de la nueva SUCURSAL: ";  
+	 cout << "\n\t- Escribe la CIUDAD de la nueva SUCURSAL (max.30): ";  
 	 getline(cin, city);
 	 fflush(stdin);
-	 cout << "\n\t- Escribe la DIRECCION de la nueva SUCURSAL: ";  
+	 cout << "\n\t- Escribe la DIRECCION de la nueva SUCURSAL (max.30): ";  
 	 getline(cin, address);
 	 fflush(stdin);
 	 cout << "\n\t- Escribe el NUMERO TELEFONICO de la nueva SUCURSAL - (xxx) xxxxxxx: ";  
@@ -281,7 +297,7 @@ void createBranch(branch**B , branch**L , unordered_map<std::string, branch*> &t
 	 fflush(stdin);
 
 	 if (!isValid(name) || !isValid(city) || !isValid(state) || !isValid(address) || !isValid(address) || !isValid(code)) {
-		 cout << " \n\n\t\t-- Campos no rellenados correctamente --\n\n"; //Provisional
+		 cout << " \n\n\t\t-- CAMPOS LLENADOS INCORRECTAMENTE --\n\n"; //Provisional
 	 }
 	 else
 	 {
@@ -327,11 +343,48 @@ void printBranchs(branch*B) {
 	printBranchs(B->next);
 }
 
+// Función para imprimir la cabecera de la tabla de sucursales
+void headerBranchs(string line) {
+    cout << line << endl;
+    string subtitle = "LISTA DE SUCURSALES";
+    cout << setw((length(line) + length(subtitle)) / 2) << subtitle << endl;
+    cout << line << endl;
+    cout << setw(5) << internal << "CODIGO"
+        << setw(30) << internal << "NOMBRE"
+        << setw(22) << internal << "CIUDAD"
+        << setw(25) << internal << "ESTADO"
+        << setw(15) << internal << "TELEFONO"
+        << setw(20) << internal << "DIRECCION" << endl;
+    cout << line << endl;
+}
+
+// Función para imprimir las sucursales en forma de tabla
+void printBranchsInTable(branch* B) {
+    while (B) {
+        cout << setw(5) << internal << B->code
+            << setw(30) << internal << B->name
+            << setw(22) << internal << B->city
+            << setw(25) << internal << B->state
+            << setw(15) << internal << B->tlf
+            << setw(20) << internal << B->address << endl;
+        B = B->next;
+    }
+}
+
+// Función para imprimir la tabla de sucursales
+void tableBranchs(branch* B) {
+    string line = "|-----------------------------------------------------------------------------------------------------------------------";
+    headerBranchs(line);
+    printBranchsInTable(B);
+    cout << line << "\n\n\t";
+}
+
+
 branch* selectBranchByCode(branch* B) {
      string codeSelect;
      printBranchs(B);
      cin.ignore();
-     cout << "\n\n\n\tIngrese el codigo de la sucursal entre []: ";
+     cout << "\n\n\n\tIngrese el codigo de la sucursal: ";
      getline(cin, codeSelect);
      if (codeSelect.empty() || codeSelect == "0") return NULL;  
      return searchBranchByCode(B, codeSelect);
@@ -350,16 +403,16 @@ void optionsModBranch(branch*selected){
 	string op0 = "0. VOLVER A MENU ANTERIOR.";
 	string msg = "Su opcion (0-5) : _|";
 
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
 	 cout << line << endl;
-	 cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
-	 cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
-	 cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
-	 cout << setw((lineWidth + op4.length()) / 2) << op4 << endl;
-	 cout << setw((lineWidth + op5.length()) / 2) << op5 << endl;
-     cout << setw((lineWidth + op6.length()) / 2) << op6 << endl;
-	 cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
-	 cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
+	 cout << setw((lineWidth + length(op1)) / 2) << op1 << endl;
+	 cout << setw((lineWidth + length(op2)) / 2) << op2 << endl;
+	 cout << setw((lineWidth + length(op3)) / 2) << op3 << endl;
+	 cout << setw((lineWidth + length(op4)) / 2) << op4 << endl;
+	 cout << setw((lineWidth + length(op5)) / 2) << op5 << endl;
+     cout << setw((lineWidth + length(op6)) / 2) << op6 << endl;
+	 cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
+	 cout << setw((lineWidth + length(msg)) / 2) << msg << endl;
 	 cout << line << endl;
      cout << "\n\tSUCURSAL ENCONTRADA: \n";
      cout << "\n\t - " << selected->name << " [" << selected->code << "]";
@@ -476,7 +529,7 @@ void menuDeleBranch(branch**B,branch**L){
      system("cls");
      menuHeader();
      string subtitle = "ELIMINAR SUCURSAL";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
      cout << line << endl;
 
      branch*selected = selectBranchByCode(*B);
@@ -504,14 +557,14 @@ void menuConsultBranchByCode(branch*B){
      system("cls");
      menuHeader();
      string subtitle = "CONSULTAR SUCURSAL POR CODIGO";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
 	 cout << line << endl;
      branch* selected = selectBranchByCode(B);
      if (selected)
      {
           system("cls");
           menuHeader();
-          cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+          cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
           cout << line << endl;
           cout << "\n\tSUCURSAL ENCONTRADA: \n";
           cout << "\n\t - " << selected->name << " [" << selected->code<<"]";
@@ -530,9 +583,9 @@ void menuConsultByState(branch*B ){
      string userInput;
      string subtitle = "CONSULTAR SUCURSAL POR ESTADO";
      string op0 = "0. VOLVER A MENU ANTERIOR.";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
 	 cout << line << endl;
-     cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+     cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
      cout << line <<endl;
      cin.ignore();
      cout << "\nIngresa el estado: ";
@@ -540,60 +593,53 @@ void menuConsultByState(branch*B ){
      if (userInput == "0") return;
      cout << "\n\tSUCURSALES ENCONTRADAS: \n";
      branch* selected = searchBranchByState(B , userInput);
-     if (!selected) cout << "\n\n\t\tNINGUNA...\n\n";
-     while (selected)
-     {
-          cout << "\n\t - " << selected->name << " [" << selected->code << "]";
-          cout << "\n\t\t ~ Direccion: " << selected->city << ", " << selected->state << ", " << selected->address;
-          cout << "\n\t\t ~ Telefono: " << selected->tlf << "\n\n";
-          selected = searchBranchByState(selected->next , userInput);
+     if (!selected) {
+         cout << "\n\n\t\tNINGUNA...\n\n";
+         return;
      }
+     tableBranchs(selected);
      system("pause");
 }
 
 void menuConsultByCity(branch* B) {
-     system("cls");
-     menuHeader();
-     string userInput;
-     string subtitle = "CONSULTAR SUCURSAL POR CIUDAD";
-     string op0 = "0. VOLVER A MENU ANTERIOR.";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
-     cout << line << endl;
-     cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
-     cout << line << endl;
-     cin.ignore();
-     cout << "\nIngresa la ciudad: ";
-     getline(cin, userInput);
-     if (userInput == "0") return;
-     cout << "\n\tSUCURSALES ENCONTRADAS: \n";
-     branch* selected = searchBranchByCity(B, userInput);
-     if (!selected) cout << "\n\n\t\tNINGUNA...\n\n";
-     while (selected)
-     {
-
-          cout << "\n\t - " << selected->name << " [" << selected->code << "]";
-          cout << "\n\t\t ~ Direccion: " << selected->city << ", " << selected->state << ", " << selected->address;
-          cout << "\n\t\t ~ Telefono: " << selected->tlf << "\n\n";
-          selected = searchBranchByCity(selected->next, userInput);
-     }
+    system("cls");
+    menuHeader();
+    string userInput;
+    string subtitle = "CONSULTAR SUCURSAL POR CIUDAD";
+    string op0 = "0. VOLVER A MENU ANTERIOR.";
+    cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
+    cout << line << endl;
+    cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
+    cout << line << endl;
+    cin.ignore();
+    cout << "\nIngresa la ciudad: ";
+    getline(cin, userInput);
+    if (userInput == "0") return;
+    cout << "\n\tSUCURSALES ENCONTRADAS: \n";
+    branch* selected = searchBranchByCity(B, userInput);
+    if (!selected) {
+        cout << "\n\n\t\tNINGUNA...\n\n";
+        return;
+    }
+    tableBranchs(selected);
      system("pause");
 }
 
 void menuConsultBranchByDesc(branch*B){
      string subtitle = "CONSULTAR SUCURSAL POR DESCRIPCION";
      string op1 = "1. ESTADO";
-	string op2 = "2. CIUDAD";
+	 string op2 = "2. CIUDAD";
      string op0 = "0. VOLVER A MENU ANTERIOR.";
      int op = -1;
      do
      {
           system("cls");
           menuHeader();
-          cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+          cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
           cout << line << endl;
-          cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
-          cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
-          cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+          cout << setw((lineWidth + length(op1)) / 2) << op1 << endl;
+          cout << setw((lineWidth + length(op2)) / 2) << op2 << endl;
+          cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
           cout << line <<endl;
           cin >> op;
           switch (op)
@@ -719,7 +765,7 @@ void createProduct(product**P , product**L){
          price = -1;
      }
      if (!isValid(name) || !isValid(description) || price <= 0) {
-          cout << " \n\n\t\t-- Campos no rellenados correctamente --\n\n"; 
+          cout << " \n\n\t\t-- CAMPOS LLENADOS INCORECTAMENTE --\n\n"; 
      }
      else
      {
@@ -739,13 +785,54 @@ void showAllProducts(product*P) {
      system("cls");
      menuHeader();
      string subtitle = "LISTA DE PRODUCTOS";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
      cout << line << endl;
      printProducts(P);
      cout << "\n\n";
 }
+/*PROVISIONAL*/
+void headerProducts(string line) {
+    
+    cout << line << endl;
+    string subtitle = "LISTA DE PRODUCTOS";
+    cout << setw((length(line) + length(subtitle)) / 2) << subtitle << endl;
+    cout << line << endl;
+    cout << setw(10) << internal << "CODIGO"
+         << setw(15) << internal << "NOMBRE"
+         << setw(17) << internal << "DESCRIPCION"
+         << setw(13) << internal << "PRECIO" << endl;
+    cout << line << endl;
+}
 
+// Función para imprimir los productos en forma de tabla
+void printProductsInTable(product* P) {
+    while (P) {
+        cout << setw(10) << internal << P->code
+             << setw(15) << internal << P->name
+             << setw(15) << internal << P->description
+             << setw(15) << fixed << setprecision(2) << P->price << endl;
+        P = P->next;
+    }
+}
 
+// Función para imprimir la tabla de productos
+void tableProducts(product* P) {
+    string line = "|------------------------------------------------------------|";
+    headerProducts(line);
+    printProductsInTable(P);
+    cout << line << "\n\n\t";
+}
+/*PROVISIONAL*/
+/*void printProductsInTable(product* P) {
+    while (P) {
+        cout << setw(10) << internal << P->code
+             << setw(15) << internal << P->name
+             << setw(15) << internal << P->amount
+             << setw(15) << internal << P->minAmount
+             << setw(15) << fixed << setprecision(2) << P->price << endl;
+        P = P->next;
+    }
+}*/
 // RETURNS A SELECTED PRODUCT BY CODE
 product* selectProductByCode(product* P) {
      string codeSelect;
@@ -769,14 +856,14 @@ void optionsModProduct(product*selected) {
      string op0 = "0. VOLVER A MENU ANTERIOR.";
      string msg = "Su opcion (0-5) : _|";
 
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
      cout << line << endl;
-     cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
-     cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
-     cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
-     cout << setw((lineWidth + op4.length()) / 2) << op4 << endl;
-     cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
-     cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
+     cout << setw((lineWidth + length(op1)) / 2) << op1 << endl;
+     cout << setw((lineWidth + length(op2)) / 2) << op2 << endl;
+     cout << setw((lineWidth + length(op3)) / 2) << op3 << endl;
+     cout << setw((lineWidth + length(op4)) / 2) << op4 << endl;
+     cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
+     cout << setw((lineWidth + length(msg)) / 2) << msg << endl;
      cout << line << endl;
      cout << "\n\tSUCURSAL ENCONTRADA: \n";
      cout << "\n\t - " << selected->name << " [" << selected->code << "]";
@@ -791,8 +878,8 @@ void menuModProduct(product* P) {
      menuHeader();
      string subtitle = "CONSULTAR SUCURSAL POR DESCRIPCION";
      string op0 = "0. VOLVER A MENU ANTERIOR.";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
-     cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
      cout << line << endl;
      product* selected = selectProductByCode(P); // THE USER SELECT A PRODUCT
      if (!selected)
@@ -895,8 +982,8 @@ void menuDelProduct(product**P , product**L) {
      menuHeader();
      string subtitle = "ELIMINAR PRODUCTO";
      string op0 = "0. VOLVER A MENU ANTERIOR.";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
-     cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
      cout << line << endl;
      product* selected = selectProductByCode(*P);
      if (selected)
@@ -926,14 +1013,14 @@ void menuConsultProductByCode(product* B) {
      system("cls");
      menuHeader();
      string subtitle = "CONSULTAR PRODUCTO POR CODIGO";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
      cout << line << endl;
      product* selected = selectProductByCode(B);
      if (selected)
      {
           system("cls");
           menuHeader();
-          cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+          cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
           cout << line << endl;
           cout << "\n\tPRODUCTO ENCONTRADO: \n";
           cout << "\n\t - " << selected->name << " [" << selected->code << "]";
@@ -951,9 +1038,9 @@ void menuConsultProductByType(product* B) { // CAMBIAR EL "TYPE"
      string userInput;
      string subtitle = "CONSULTAR PRODUCTOS POR DESCRIPCION";
      string op0 = "0. VOLVER A MENU ANTERIOR.";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
      cout << line << endl;
-     cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+     cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
      cout << line << endl;
      cout << "\nIngresa la descripcion: ";
      getline(cin, userInput);
@@ -978,11 +1065,10 @@ void menuConsultProductByPrice(product* B) { // CAMBIAR EL "TYPE"
      float userInput;
      string subtitle = "CONSULTAR PRODUCTOS POR PRECIO";
      string op0 = "0. VOLVER A MENU ANTERIOR.";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
      cout << line << endl;
-     cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+     cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
      cout << line << endl;
-     fflush(stdin);
      fflush(stdin);
      cout << "\nINGRESE EL PRECIO: ";
      cin >> userInput;
@@ -1010,11 +1096,11 @@ void menuConsultProductByDesc(product* B) {
      {
           system("cls");
           menuHeader();
-          cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+          cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
           cout << line << endl;
-          cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
-          cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
-          cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+          cout << setw((lineWidth + length(op1)) / 2) << op1 << endl;
+          cout << setw((lineWidth + length(op2)) / 2) << op2 << endl;
+          cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
           cout << line << endl;
           cin >> op;
           if (cin.fail())
@@ -1047,14 +1133,46 @@ void printProductssOfBranch(product*P) {
      cout << "\n\t\t ~ Descripcion: " << P->description << "\n\t\t ~ Precio: " << P->price << "$";
 }
 
+void headerProductsOfBranch(string line) {
+    cout << line << endl;
+    string subtitle = "LISTA DE PRODUCTOS";
+    cout << setw((length(line) + length(subtitle)) / 2) << subtitle << endl;
+    cout << line << endl;
+    cout << setw(10) << internal << "CODIGO"
+        << setw(15) << internal << "NOMBRE"
+        << setw(17) << internal << "EXISTENCIA"
+        << setw(17) << internal << "EXISTENCIA MIN."
+        << setw(13) << internal << "PRECIO" << endl;
+    cout << line << endl;
+}
+
+void printProductsInTableOfBranch(product* P) {
+    while (P) {
+        cout << setw(10) << internal << P->code
+            << setw(15) << internal << P->name
+            << setw(15) << internal << P->amount
+            << setw(15) << internal << P->minAmount
+            << setw(15) << fixed << setprecision(2) << P->price << endl;
+        P = P->next;
+    }
+}
+
+// Función para imprimir la tabla de productos
+void tableProductsOfBranch(product* P) {
+    string line = "|----------------------------------------------------------------------------|";
+    headerProductsOfBranch(line);
+    printProductsInTableOfBranch(P);
+    cout << line << "\n\n\t";
+}
+
 void menuAddProductToBranch(branch*B, product*P) {
      int am, minAm;
      system("cls");
      menuHeader();
      string subtitle = "1.2.7.2 AGREGAR PRODUTO A SUCURSAL";
      string op0 = "0. VOLVER A MENU ANTERIOR.";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
-     cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
      cout << line << endl;
      product* selected = selectProductByCode(P);
      if (selected)
@@ -1104,8 +1222,8 @@ void menuDelProductOfBranch(product**P , product**L) {
      menuHeader();
      string subtitle = "1.2.7.2. 3 BORRAR PRODUCTO DE SUCURSAL";
      string op0 = "0. VOLVER A MENU ANTERIOR.";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
-     cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
      cout << line << endl;
      product* selected = selectProductByCode(*P);
      if (selected)
@@ -1147,16 +1265,16 @@ void optionsModProductOfBranch(product*selected){
      string op0 = "0. VOLVER A MENU ANTERIOR.";
      string msg = "Su opcion (0-5) : _";
 
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
      cout << line << endl;
-     cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
-     cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
-     cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
-     cout << setw((lineWidth + op4.length()) / 2) << op4 << endl;
-     cout << setw((lineWidth + op5.length()) / 2) << op5 << endl;
-     cout << setw((lineWidth + op6.length()) / 2) << op6 << endl;
-     cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
-     cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
+     cout << setw((lineWidth + length(op1)) / 2) << op1 << endl;
+     cout << setw((lineWidth + length(op2)) / 2) << op2 << endl;
+     cout << setw((lineWidth + length(op3)) / 2) << op3 << endl;
+     cout << setw((lineWidth + length(op4)) / 2) << op4 << endl;
+     cout << setw((lineWidth + length(op5)) / 2) << op5 << endl;
+     cout << setw((lineWidth + length(op6)) / 2) << op6 << endl;
+     cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
+     cout << setw((lineWidth + length(msg)) / 2) << msg << endl;
      cout << line << endl;
      cout << "\n\tPRODUCTO ENCONTRADO: \n";
      cout << "\n\t - " << selected->name << " [" << selected->code << "]";
@@ -1174,7 +1292,7 @@ void menuModProductOfBranch(product* P) {
      system("cls");
      menuHeader();
      string subtitle = "MODIFICAR INVENTARIO";
-     cout << setw((lineWidth + subtitle.length()) / 2) << subtitle << endl;
+     cout << setw((lineWidth + length(subtitle)) / 2) << subtitle << endl;
      cout << line << endl;
      product* selected = selectProductByCode(P);
      if (selected)
@@ -1343,13 +1461,13 @@ void menuInventory(branch*B , product*P) {
           string op0 = "0. VOLVER A MENU ANTERIOR.";
           string msg = "Su opcion (0-5) : _";
 
-          cout << setw((lineWidth + op1.length()) / 2) << op1 << endl;
-          cout << setw((lineWidth + op2.length()) / 2) << op2 << endl;
-          cout << setw((lineWidth + op3.length()) / 2) << op3 << endl;
-          cout << setw((lineWidth + op4.length()) / 2) << op4 << endl;
-          cout << setw((lineWidth + op5.length()) / 2) << op5 << endl;
-          cout << setw((lineWidth + op0.length()) / 2) << op0 << endl;
-          cout << setw((lineWidth + msg.length()) / 2) << msg << endl;
+          cout << setw((lineWidth + length(op1)) / 2) << op1 << endl;
+          cout << setw((lineWidth + length(op2)) / 2) << op2 << endl;
+          cout << setw((lineWidth + length(op3)) / 2) << op3 << endl;
+          cout << setw((lineWidth + length(op4)) / 2) << op4 << endl;
+          cout << setw((lineWidth + length(op5)) / 2) << op5 << endl;
+          cout << setw((lineWidth + length(op0)) / 2) << op0 << endl;
+          cout << setw((lineWidth + length(msg)) / 2) << msg << endl;
           cout << line << endl;
           cout << "\n\tSucursal seleccionada: ";
           if (!selected)
@@ -1392,7 +1510,8 @@ void menuInventory(branch*B , product*P) {
                     break;
                case 5:
                         cout << "\n\n\t\tPRODUCTOS DE " << selected->name<<"\n\n";
-                        showAllProducts(selected->products);
+                        //showAllProducts(selected->products);
+                        tableProductsOfBranch(selected->products);
                         cout << "\n\n";
                         system("pause");
                     break;
@@ -1633,7 +1752,8 @@ int main() {
                                                   menuConsultProductByDesc(products);
                                                   break;
                                              case 6:
-                                                  showAllProducts(products);
+                                                  //showAllProducts(products);
+                                                  tableProducts(products);
                                                   system("pause");
                                                   break;
                                         }
@@ -1670,7 +1790,8 @@ int main() {
                                                   menuConsultBranchByDesc(branchs);
                                                   break;
                                              case 6: // Show All Branchs  
-                                                  printBranchs(branchs);
+                                                  //printBranchs(branchs);
+                                                  tableBranchs(branchs);
                                                   system("pause");
                                                   break;
                                              case 7: // INVENTORY
@@ -1686,13 +1807,8 @@ int main() {
 				op = -1;
 				break;
             case 2:
-            {// No available
-                cin.ignore();
-                string user;
-                cout << "\n\t\t=> ";
-                getline(cin, user);
-                cout << hashB[user]->name<<endl;
-                system("pause");
+            {
+                // No available
                 break;
             }
 			case 3:
@@ -1701,11 +1817,11 @@ int main() {
 		}
 	} while (op != 0);
      saveProducts(products);
-	saveBranchs(branchs);
+	 saveBranchs(branchs);
      saveProductsOfBranch(branchs);
      return 0;
 }
 
 /*
-    PD: No se utilizan los metodos propios del objeto string
+    
 */
