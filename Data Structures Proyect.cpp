@@ -163,6 +163,7 @@ void menu() {
 }
 
 /* Functions */
+
 string tolow(string cad){
      for (int i = 0; i < cad.size(); i++)
      {
@@ -344,36 +345,35 @@ void printBranchs(branch*B) {
 }
 
 // Función para imprimir la cabecera de la tabla de sucursales
-void headerBranchs(string line) {
+
+void headerBranchs(const string& line) {
     cout << line << endl;
     string subtitle = "LISTA DE SUCURSALES";
-    cout << setw((length(line) + length(subtitle)) / 2) << subtitle << endl;
+    cout << setw((line.length() + subtitle.length()) / 2) << subtitle << endl;
     cout << line << endl;
-    cout << setw(5) << internal << "CODIGO"
-        << setw(30) << internal << "NOMBRE"
-        << setw(22) << internal << "CIUDAD"
-        << setw(25) << internal << "ESTADO"
-        << setw(15) << internal << "TELEFONO"
-        << setw(20) << internal << "DIRECCION" << endl;
+    cout << setw(9) << "CODIGO"
+        << setw(15) << "NOMBRE"
+        << setw(15) << "CIUDAD"
+        << setw(10) << "ESTADO"
+        << setw(15) << "TELEFONO"
+        << setw(50) << "DIRECCION" << endl;
     cout << line << endl;
 }
 
-// Función para imprimir las sucursales en forma de tabla
 void printBranchsInTable(branch* B) {
     while (B) {
-        cout << setw(5) << internal << B->code
-            << setw(30) << internal << B->name
-            << setw(22) << internal << B->city
-            << setw(25) << internal << B->state
-            << setw(15) << internal << B->tlf
-            << setw(20) << internal << B->address << endl;
+        cout << setw(9) << B->code
+            << setw(15) << B->name
+            << setw(15) << B->city
+            << setw(10) << B->state
+            << setw(15) << B->tlf
+            << "   " << setw(50) << B->address << endl;
         B = B->next;
     }
 }
 
-// Función para imprimir la tabla de sucursales
 void tableBranchs(branch* B) {
-    string line = "|-----------------------------------------------------------------------------------------------------------------------";
+    string line = "|----------------------------------------------------------------------------------------------------------------------|";
     headerBranchs(line);
     printBranchsInTable(B);
     cout << line << "\n\n\t";
@@ -717,8 +717,6 @@ void addProduct(product** P, product** L, string codeP, string name, string desc
      newP->name = name;
      newP->description = description;
      newP->price = price;
-
-     /* Default atributes */
      newP->code = codeP;
      newP->amount = amount;
      newP->minAmount = minAmount;
@@ -741,7 +739,6 @@ void addProduct(product** P, product** L, string codeP, string name, string desc
 // CONTROLLER CREATOR OF A PRODUCT
 void createProduct(product**P , product**L){
      string code , name , description;
-     float price;
      bool invalidCode = true;
      do // IF THE CODE IS ALREADY TAKES, THE USER IS OBLIGATED TO TRY ANOTHER CODE
      {
@@ -756,21 +753,18 @@ void createProduct(product**P , product**L){
      getline(cin, name);
      cout << "\n\t- Escribe la DESCRIPCION del nuevo PRODUCTO: ";
      getline(cin, description);
-     cout << "\n\t- Escribe el PRECIO del nuevo PRODUCTO (x.xx): ";
-     cin >> price;
      if (cin.fail())
      {
          cin.clear();
          cin.ignore();
-         price = -1;
      }
-     if (!isValid(name) || !isValid(description) || price <= 0) {
+     if (!isValid(name) || !isValid(description)) {
           cout << " \n\n\t\t-- CAMPOS LLENADOS INCORECTAMENTE --\n\n"; 
      }
      else
      {
          cout << "\n\n\t\t-- PRODUCTO AGREGADO --\n\n";
-          addProduct(P , L , code , name , description , price , 0 , 0);
+          addProduct(P , L , code , name , description , 0 , 0 , 0);
      }
      system("pause");
 }
@@ -798,9 +792,8 @@ void headerProducts(string line) {
     cout << setw((length(line) + length(subtitle)) / 2) << subtitle << endl;
     cout << line << endl;
     cout << setw(10) << internal << "CODIGO"
-         << setw(15) << internal << "NOMBRE"
-         << setw(17) << internal << "DESCRIPCION"
-         << setw(13) << internal << "PRECIO" << endl;
+        << setw(25) << internal << "NOMBRE"
+        << setw(35) << internal << "DESCRIPCION"<<endl;
     cout << line << endl;
 }
 
@@ -808,16 +801,17 @@ void headerProducts(string line) {
 void printProductsInTable(product* P) {
     while (P) {
         cout << setw(10) << internal << P->code
-             << setw(15) << internal << P->name
-             << setw(15) << internal << P->description
-             << setw(15) << fixed << setprecision(2) << P->price << endl;
+            << setw(25) << internal << P->name<<"   " 
+            << setw(35) << internal << P->description << endl;
         P = P->next;
     }
 }
 
 // Función para imprimir la tabla de productos
 void tableProducts(product* P) {
-    string line = "|------------------------------------------------------------|";
+    system("cls");
+    cout << "\n\n";
+    string line = "|-------------------------------------------------------------------------------|";
     headerProducts(line);
     printProductsInTable(P);
     cout << line << "\n\n\t";
@@ -1123,8 +1117,8 @@ void menuConsultProductByDesc(product* B) {
 }
 
 
-void addProductToBranch(branch*B , product*P ,int amount , int minAmount) {
-     addProduct(&B->products, &B->lastP, P->code, P->name, P->description, P->price , amount , minAmount);
+void addProductToBranch(branch*B , product*P ,int amount , int minAmount , float price) {
+     addProduct(&B->products, &B->lastP, P->code, P->name, P->description, price , amount , minAmount);
 }
 
 void printProductssOfBranch(product*P) {
@@ -1167,6 +1161,7 @@ void tableProductsOfBranch(product* P) {
 
 void menuAddProductToBranch(branch*B, product*P) {
      int am, minAm;
+     float price;
      system("cls");
      menuHeader();
      string subtitle = "1.2.7.2 AGREGAR PRODUTO A SUCURSAL";
@@ -1187,9 +1182,12 @@ void menuAddProductToBranch(branch*B, product*P) {
           cout << "\n\t\t ~ Descripcion: " << selected->description << "\n\t\t ~ Precio: " << selected->price << "$\n\n";
           cout << "\n\tIngresa la cantidad minima del producto: "; cin >> minAm;
           cout << "\n\tIngresa la cantidad del producto: "; cin >> am;
-          if (am < minAm)
+          cout << "\n\tIngresa el precio del producto: "; cin >> price;
+          if ((am < minAm) || price < 0 || cin.fail())
           {
-               cout << "\n\t-- Cantidad a agregar NO puede ser menor a la minima --\n\n";
+               cout << "\n\t-- DATOS INVALIDOS --\n\n";
+               cin.clear();
+                   cin.ignore();
           }
           else {
                cout << "\n\tSeguro que desea agregar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
@@ -1203,7 +1201,7 @@ void menuAddProductToBranch(branch*B, product*P) {
                }
                if (op == 1)
                {
-                    addProductToBranch(B, selected , am , minAm);
+                    addProductToBranch(B, selected , am , minAm , price);
                     cout << "\n\n\t\t-- PRODUCTO AGREGADO A SUCURSAL --\n\n";
                }
           }
@@ -1524,7 +1522,7 @@ void menuInventory(branch*B , product*P) {
 void readBranchs(branch**B , branch**L , unordered_map<std::string, branch*>& tableB){ // Update the function to delete the trash in line
      ifstream archivo("branchs.txt");
      if (archivo.fail()) return; 
-     string n, s , c , d , t , code ,line;
+     string n, s , c , a , t , code ,line;
      while (getline(archivo , line))
      {
           replaceTrash(line);
@@ -1541,22 +1539,22 @@ void readBranchs(branch**B , branch**L , unordered_map<std::string, branch*>& ta
                          n = dato;
                          break;
                     case 3:
-                         s = dato;
+                         c = dato;
                          break;
                     case 4:
-                         c=dato;
+                         s = dato;
                          break;
                     case 5:
-                         d=dato;
+                         t=dato;
                          break;
                     case 6:
-                         t=dato;
+                         a=dato;
                          break;
                }
           }
           if (!tableB[code])
           {
-              addBranch(B, L, code, n, c, s, d, t, tableB);
+              addBranch(B, L, code, n, c, s, a, t, tableB);
           }
      }
      archivo.close();
@@ -1569,7 +1567,7 @@ void saveBranchs(branch*B){
      {
           while (B)
           {
-               archivo << B->code << "," << B->name << "," << B->state << "," << B->city << "," << B->address << "," << B->tlf << "\n";
+               archivo << B->code << "," << B->name << "," << B->city << "," << B->state << "," << B->tlf << "," << B->address << "\n";
                B = B->next;
           }
      }
@@ -1581,14 +1579,13 @@ void readProducts(product** P, product** L) { // Update the function to delete t
      ifstream archivo("products.txt");
      if (archivo.fail()) return;
      string code, n, d,line;
-     float price;
      while (getline(archivo, line))
      {
           replaceTrash(line);
           istringstream ss(line);
           string dato;
 
-          for (int i = 1; i < 5; i++)
+          for (int i = 1; i < 4; i++)
           {
                getline(ss, dato, ',');
                switch (i)
@@ -1601,12 +1598,9 @@ void readProducts(product** P, product** L) { // Update the function to delete t
                     case 3:
                          d = dato;
                          break;
-                    case 4:
-                         price = stof(dato);
-                         break;
                }
           }
-          addProduct(P, L, code, n, d, price, 0 , 0);
+          addProduct(P, L, code, n, d, 0, 0 , 0);
      }
      archivo.close();
 }
@@ -1617,7 +1611,7 @@ void saveProducts(product* P) {
      {
           while (P)
           {
-               file << P->code << "," << P->name << "," << P->description << "," << P->price << "\n";
+               file << P->code << "," << P->name << "," << P->description << "\n";
                P = P->next;
           }
      }
@@ -1630,6 +1624,7 @@ void readProductsOfBranch(branch*B , product*P , unordered_map<std::string, bran
      if (archivo.fail()) return;
      string codeB, codeP , line;
      int am , minAm;
+     float price , temp;
      branch*selectedB;
      product*selectedP;
      while (getline(archivo , line))
@@ -1637,7 +1632,7 @@ void readProductsOfBranch(branch*B , product*P , unordered_map<std::string, bran
           replaceTrash(line);
           istringstream ss(line);
           string data;
-          for (int i = 0; i < 4; i++)
+          for (int i = 0; i < 5; i++)
           {
                getline(ss , data , ',');
                switch (i)
@@ -1649,18 +1644,24 @@ void readProductsOfBranch(branch*B , product*P , unordered_map<std::string, bran
                          codeP = data;
                          break;
                     case 2:
-                         minAm = stoi(data);
-                         break;
-                    case 3:
                          am = stoi(data);
                          break;
+                    case 3:
+                         minAm = stoi(data);
+                         break;
+                    case 4:
+                        price = stof(data);
+                        getline(ss, data, ',');
+                        temp = stof(data) / 100;
+                        price += temp;
+                        break;
                }
           }
           selectedB = tableB[codeB];
           selectedP = searchProductByCode(P , codeP);
-          if (selectedB && selectedP && am >= minAm)
+          if (selectedB && selectedP && am >= minAm && price > 0)
           {
-               addProductToBranch(selectedB , selectedP , am , minAm);
+               addProductToBranch(selectedB , selectedP , am , minAm, price);
           }
      }
      archivo.close();
@@ -1674,7 +1675,7 @@ void saveProductsOfBranch(branch*B){
           product*P = B->products; 
           while (P)
           {
-               archivo << B->code<<","<<P->code<<","<<P->minAmount<<","<<P->amount<<"\n";
+               archivo << B->code<<","<<P->code<<","<<P->amount<<","<<P->minAmount<<","<<P->price << "\n";
                P = P->next;
           }
           B = B->next;
