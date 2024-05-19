@@ -1,3 +1,3 @@
 ﻿  Data Structures Proyect.cpp
-C:\Users\aabre\OneDrive\Documents\UCAB\SEGUNDO SEMESTRE\Estructuras de Datos\Proyecto FASE 1\Data Structures Proyect\Data Structures Proyect.cpp(885,17): warning C4101: 'userPrice': unreferenced local variable
+C:\Users\aabre\OneDrive\Documents\UCAB\SEGUNDO SEMESTRE\Estructuras de Datos\Proyecto FASE 1\Data Structures Proyect\Data Structures Proyect.cpp(974,17): warning C4101: 'userPrice': unreferenced local variable
   Data Structures Proyect.vcxproj -> C:\Users\aabre\OneDrive\Documents\UCAB\SEGUNDO SEMESTRE\Estructuras de Datos\Proyecto FASE 1\Data Structures Proyect\x64\Debug\Data Structures Proyect.exe

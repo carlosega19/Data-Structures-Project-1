@@ -2,3 +2,4 @@
 103,La Vega,Caracas,DC,212999966,Ed Sol PB La india El paraiso
 204,Chacaito,Caracas,DC,212555777,Plaza Brion CC Chacaito L200 Chacaito
 316,La Carlota,Caracas,DC,212235555,CC Milenium L502 La Carlota
+69,Los GAYS,Valencia,Carabobo,69696969,Calle Super Gay

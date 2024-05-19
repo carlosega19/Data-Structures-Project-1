@@ -12,7 +12,6 @@
 #include <locale.h>
 #include <string>
 #include <sstream>
-#include <cctype>
 #include <unordered_map>
 #include <algorithm>
 using namespace std;
@@ -90,7 +89,7 @@ void menuMantProds(){
      string subtitle = "1.1 MANTENIMIENTO PRODUCTOS";
 	string op1 = "1.1. 1. AGREGAR";
 	string op2 = "1.1. 2. MODIFICAR";
-	string op3 = "1.1. 3. ELIMNAR";
+	string op3 = "1.1. 3. ELIMINAR";
 	string op4 = "1.1. 4. CONSULTA POR CODIGO";
 	string op5 = "1.1. 5. CONSULTA POR DESCRIPCION";
 	string op6 = "1.1. 6. MOSTRAR TODOS LOS PRODUCTOS";
@@ -118,7 +117,7 @@ void menuMantBranchs(){
      string subtitle = "1.1 MANTENIMIENTO SUCURSALES";
 	string op1 = "1.2.1. AGREGAR";
 	string op2 = "1.2.2. MODIFICAR";
-	string op3 = "1.2.3. ELIMNAR";
+	string op3 = "1.2.3. ELIMINAR";
 	string op4 = "1.2.4. CONSULTA POR CODIGO";
 	string op5 = "1.2.5. CONSULTA POR DESCRIPCION";
 	string op6 = "1.2.6. MOSTRAR TODAS LAS SUCURSALES";
@@ -235,7 +234,7 @@ branch* searchBranchByState(branch* B, string str) {
 branch* searchBranchByCity(branch* B, string str) {
      if (!B) return NULL;
      if (tolow(B->city).find(tolow(str)) != string::npos) return B;
-     return searchBranchByState(B->next, str);
+     return searchBranchByCity(B->next, str);
 }
 
 void addBranch(branch**B , branch**L, string codeB , string name, string city , string state , string address , string tlf , unordered_map<std::string, branch*>& tableB) {
@@ -302,6 +301,7 @@ void createBranch(branch**B , branch**L , unordered_map<std::string, branch*> &t
 	 else
 	 {
 		 addBranch(B, L, code, name, city, state, address, tlf, tableB); 
+         cout << "\n\t\t-- SUCURSAL AGREGADA --\n\n\n\t";
 	 }
      system("pause");
 }
@@ -360,21 +360,25 @@ void headerBranchs(const string& line) {
 }
 
 void printBranchsInTable(branch* B) {
-    while (B) {
-        cout << setw(9) << B->code
-            << setw(15) << B->name
-            << setw(15) << B->city
-            << setw(10) << B->state
-            << setw(15) << B->tlf
-            << "   " << setw(50) << B->address << endl;
-        B = B->next;
-    }
+     cout << setw(9) << B->code
+         << setw(15) << B->name
+         << setw(15) << B->city
+         << setw(10) << B->state
+         << setw(15) << B->tlf
+         << "   " << setw(50) << B->address << endl;
+   
+  
 }
 
 void tableBranchs(branch* B) {
     string line = "|----------------------------------------------------------------------------------------------------------------------|";
     headerBranchs(line);
-    printBranchsInTable(B);
+    while (B)
+    {
+        printBranchsInTable(B);
+        B = B->next;
+    }
+    
     cout << line << "\n\n\t";
 }
 
@@ -429,7 +433,7 @@ void menuModBranch(branch *B){
      }
      else{
           int op;
-          string userEntry;
+          string userEntry = "ABC";
           do
           {
                optionsModBranch(selected);
@@ -440,79 +444,151 @@ void menuModBranch(branch *B){
                     case 1:
                          cout<<"Nombre anterior: "<<selected->name<<endl;
                          cout<<"Nuevo nombre: ";
-                         getline(cin , userEntry);
-                         cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
-                         cin >> op;
-                         if (op == 1)
+                         if (isValid(userEntry))
                          {
-                              selected->name = userEntry;
+                             getline(cin, userEntry);
+                             cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                             cin >> op;
+                             if (cin.fail())
+                             {
+                                 cin.clear();
+                                 cin.ignore();
+                             }
+                             if (op == 1)
+                             {
+                                 selected->name = userEntry;
+                             }
+                             else op = -1;
                          }
-                         else op = -1;
+                         else {
+                             cout << "\n\n\t\t-- DATO INVALIDO --\n\n\t";
+                         }
+                         
                          break;
                     case 2:
                          cout<<"Estado anterior: "<<selected->state<<endl;
                          cout<<"Nuevo estado: ";
-                         getline(cin , userEntry);
-                         cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
-                         cin >> op;
-                         if (op == 1)
+                         if (isValid(userEntry))
                          {
-                              selected->state = userEntry;
+                             getline(cin, userEntry);
+                             cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                             cin >> op;
+                             if (cin.fail())
+                             {
+                                 cin.clear();
+                                 cin.ignore();
+                             }
+                             if (op == 1)
+                             {
+                                 selected->state = userEntry;
+                             }
+                             else op = -1;
                          }
-                         else op = -1;
+                         else {
+                             cout << "\n\n\t\t-- DATO INVALIDO --\n\n\t";
+                         }
+                         
                          break;
                     case 3:
                          cout<<"Ciudad anterior: "<<selected->city<<endl;
                          cout<<"Nueva ciudad: ";
-                         getline(cin , userEntry);
-                         cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
-                         cin >> op;
-                         if (op == 1)
+                         if (isValid(userEntry))
                          {
-                              selected->city = userEntry;
+                             getline(cin, userEntry);
+                             cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                             cin >> op;
+                             if (cin.fail())
+                             {
+                                 cin.clear();
+                                 cin.ignore();
+                             }
+                             if (op == 1)
+                             {
+                                 selected->city = userEntry;
+                             }
+                             else op = -1;
                          }
-                         else op = -1;
+                         else {
+                             cout << "\n\n\t\t-- DATO INVALIDO --\n\n\t";
+                         }
+                         
                          break;
                     case 4:
                          cout<<"Direccion anterior: "<<selected->address<<endl;
                          cout<<"Nueva direccion: ";
-                         getline(cin , userEntry);
-                         cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
-                         cin >> op;
-                         if (op == 1)
+                         if (isValid(userEntry))
                          {
-                              selected->address = userEntry;
+                             getline(cin, userEntry);
+                             cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                             cin >> op;
+                             if (cin.fail())
+                             {
+                                 cin.clear();
+                                 cin.ignore();
+                             }
+                             if (op == 1)
+                             {
+                                 selected->address = userEntry;
+                             }
+                             else op = -1;
                          }
-                         else op = -1;
+                         else {
+                             cout << "\n\n\t\t-- DATO INVALIDO --\n\n\t";
+                         }
+                         
                          break;
                     case 5:
                          cout<<"Telefono anterior: "<<selected->tlf<<endl;
-                         cout<<"Nuevp telefono: ";
-                         getline(cin , userEntry);
-                         cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
-                         cin >> op;
-                         if (op == 1)
+                         cout<<"Nuevo telefono: ";
+                         if (isValid(userEntry))
                          {
-                              selected->tlf = userEntry;
+                             getline(cin, userEntry);
+                             cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
+                             cin >> op;
+                             if (cin.fail())
+                             {
+                                 cin.clear();
+                                 cin.ignore();
+                             }
+                             if (op == 1)
+                             {
+                                 selected->tlf = userEntry;
+                             }
+                             else op = -1;
                          }
-                         else op = -1;
+                         else {
+                             cout << "\n\n\t\t-- DATO INVALIDO --\n\n\t";
+                         }
                          break;
                     case 6:
-                         bool ininvalidCode = true;
+                         bool invalidCode = true;
                          cout << "Codigo anterior: " << selected->code << endl;
                          do
                          {
                               cout << "Nuevo codigo: ";
                               getline(cin, userEntry);
-                              ininvalidCode = searchBranchByCode(B, userEntry);
-                              if (ininvalidCode)
-                              if (ininvalidCode)
+                              if (isValid(userEntry))
                               {
-                                   cout << "\n\t\t\t-- CODIGO YA EXISTENTE --\n\n";
+                                  invalidCode = searchBranchByCode(B, userEntry);
+
+                                  if (invalidCode)
+                                  {
+                                      cout << "\n\t\t\t-- CODIGO YA EXISTENTE --\n\n";
+                                  }
                               }
-                         } while (ininvalidCode);
+                              else
+                              {
+                                  cout << "\n\n\t\t-- DATO INVALIDO --\n\n\t";
+                              }
+                              
+                         } while (invalidCode);
                          cout << "\n\tSeguro que desea modificar? \n\t(1) CONFIRMAR\n\t(0) Cancelar\n\t=> ";
                          cin >> op;
+                         if (cin.fail())
+                         {
+                             cin.clear();
+                             cin.ignore();
+                         }
                          if (op == 1)
                          {
                               selected->code = userEntry;
@@ -597,7 +673,13 @@ void menuConsultByState(branch*B ){
          system("pause");
          return;
      }
-     tableBranchs(selected);
+     headerBranchs(line);
+     while (selected)
+     {
+         printBranchsInTable(selected);
+         selected = searchBranchByState(selected->next, userInput);
+     }
+     cout << line << "\n\n\t\t\t";
      system("pause");
 }
 
@@ -618,10 +700,17 @@ void menuConsultByCity(branch* B) {
     cout << "\n\tSUCURSALES ENCONTRADAS: \n";
     branch* selected = searchBranchByCity(B, userInput);
     if (!selected) {
-        cout << "\n\n\t\tNINGUNA...\n\n";
+        cout << "\n\n\t\tNINGUNA...\n\n\t";
+        system("pause");
         return;
     }
-    tableBranchs(selected);
+    headerBranchs(line);
+    while (selected)
+    {
+        printBranchsInTable(selected);
+        selected = searchBranchByCity(selected->next, userInput);
+    }
+    cout << line << "\n\n\t\t\t";
      system("pause");
 }
 
@@ -740,9 +829,9 @@ void addProduct(product** P, product** L, string codeP, string name, string desc
 void createProduct(product**P , product**L){
      string code , name , description;
      bool invalidCode = true;
+     cin.ignore();
      do // IF THE CODE IS ALREADY TAKES, THE USER IS OBLIGATED TO TRY ANOTHER CODE
      {
-          cin.ignore();
           cout << "\n\t- Escribe el CODIGO del nuevo PRODUCTO: ";
           getline(cin, code);
           invalidCode = searchProductByCode(*P , code);
@@ -1636,7 +1725,11 @@ void saveProductsOfBranch(branch*B){
           product*P = B->products; 
           while (P)
           {
-               archivo << B->code<<","<<P->code<<","<<P->amount<<","<<P->minAmount<<","<<P->price << "\n";
+               double p = P->price;
+               double temp1;
+               double temp2 = modf(p, &temp1);
+               int temp3 = static_cast<int>(temp2 * 100);
+               archivo << B->code<<","<<P->code<<","<<P->amount<<","<<P->minAmount<<","<<temp1<<","<<temp3<<"\n";
                P = P->next;
           }
           B = B->next;
@@ -1646,6 +1739,7 @@ void saveProductsOfBranch(branch*B){
 
 /* -------------------------------------------------------------------- MAIN -------------------------------------------------------------------- */
 int main() {
+     setlocale(LC_ALL, "es_ES.UTF-8");
 	 int op;
      unordered_map<std::string, branch*> hashB;
      branch* branchs = NULL;
@@ -1785,5 +1879,17 @@ int main() {
 }
 
 /*
-    
+    101,101,100,10,135.00
+    101,112,35,30,247.30
+    101,137,246,50,190.50
+    101,254,60,20,605.00
+    103,254,78,10,609.00
+    103,378,220,20,1516.00
+    103,1137,63,20,182.33
+    204,137,200,30,203.00
+    204,254,216,25,730.00
+    204,378,33,33,1320.00
+    204,1137,29,20,170.00
+    316,112,72,20,199.00
+    316,254,28,30,530.00
 */
